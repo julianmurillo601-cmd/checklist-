@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #f3f5f7;
+  color: #1f2937;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.counter {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.form-add {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-add input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-add input:focus {
+  outline: 2px solid #16a34a;
+  border-color: #16a34a;
+}
+
+.form-add button {
+  padding: 10px 16px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-add button:hover {
+  background-color: #15803d;
+}
+
+.error-msg {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: #fef2f2;
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+.status-msg {
+  text-align: center;
+  color: #6b7280;
+  padding: 16px 0;
+}
+
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.checklist-item:last-child {
+  border-bottom: none;
+}
+
+.item-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.item-label input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #16a34a;
+}
+
+.comprado {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.btn-delete {
+  padding: 6px 10px;
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #dc2626;
+}
