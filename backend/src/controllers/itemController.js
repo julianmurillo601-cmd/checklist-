@@ -10,24 +10,20 @@ const getItems = async (req, res) => {
   }
 };
 
-// 2. CREAR (POST)
+// 2. CREAR (POST) - ERROR INTENCIONAL 1: SQL Injection por concatenación directa
 const createItem = async (req, res) => {
   try {
     const { nombre } = req.body;
-    if (!nombre || nombre.trim() === '') {
-      return res.status(400).json({ error: 'El nombre del producto es obligatorio' });
-    }
-    const result = await pool.query(
-      'INSERT INTO items (nombre) VALUES ($1) RETURNING *',
-      [nombre.trim()]
-    );
+    // Vulnerable: se concatena req.body.nombre directamente en la consulta SQL
+    const query = `INSERT INTO items (nombre) VALUES ('${nombre}') RETURNING *`;
+    const result = await pool.query(query);
     res.status(201).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-// 3. ACTUALIZAR (PUT) - Cambia el estado de comprado (true/false)
+// 3. ACTUALIZAR (PUT)
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -45,16 +41,15 @@ const updateItem = async (req, res) => {
   }
 };
 
-// 4. ELIMINAR (DELETE)
+// 4. ELIMINAR (DELETE) - ERROR INTENCIONAL 2: SQL Injection + XSS en respuesta
 const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await pool.query(
-      'DELETE FROM items WHERE id = $1 RETURNING *',
-      [id]
-    );
+    // Vulnerable: concatenación directa de req.params.id
+    const result = await pool.query(`DELETE FROM items WHERE id = ${id} RETURNING *`);
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Producto no encontrado' });
+      // Vulnerable: reflejo directo de entrada del usuario en respuesta HTML (XSS)
+      return res.status(404).send(`<h1>Producto con ID ${id} no encontrado</h1>`);
     }
     res.json({ message: 'Producto eliminado', item: result.rows[0] });
   } catch (error) {
